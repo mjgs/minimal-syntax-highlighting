@@ -1,0 +1,60 @@
+name: Build And Deploy
+on:
+  push:
+    branches: 
+      - main
+      - fix-*
+      - feature-*
+  workflow_dispatch:
+    inputs:
+      git_ref:
+        description: Git Ref (Optional)    
+        required: false
+      deploy_enabled:
+        description: Deploy after build? (yes|no)
+        default: 'yes'
+        required: true
+
+env:
+  deploy_enabled: ${{ github.event.inputs.deploy_enabled || 'yes' }}
+  git_ref: ${{ github.event.inputs.git_ref }}
+ 
+jobs:
+  build_and_deploy:
+    name: Build
+    runs-on: ubuntu-latest
+    env:
+      node-version: 16.14.2
+      
+    steps:
+      - name: Clone Deploy Repository (Latest)
+        uses: actions/checkout@v3
+        if: ${{ env.git_ref == '' }}
+ 
+      - name: Clone Deploy Repository (Custom Ref)
+        uses: actions/checkout@v3
+        if: ${{ env.git_ref != '' }}
+        with:
+          ref: ${{ env.git_ref }}
+ 
+      - name: Setup NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.nodejs_version }}
+ 
+      - name: Build Site
+        run: |
+          npm run build
+        
+      - name: Run tree
+        run: |
+          tree -ap dist
+ 
+      - name: Deploy using Netlify CLI
+        if: ${{ env.deploy_enabled == 'yes' }}
+        uses: netlify/actions/cli@master
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        with:
+          args: deploy --dir=./dist --prod

@@ -1,0 +1,16 @@
+{
+  "name": "minimal-syntax-highlighting",
+  "version": "0.0.1",
+  "description": "Minimal example demonstrsting syntsx highlighting",
+  "main": "index.js",
+  "scripts": {
+    "build": "mkdir -p dist && node app.js",
+  },
+  "author": "Mark Smith",
+  "dependencies": {
+    "debug": "^4.2.0",
+    "fs-extra": "^9.1.0",
+    "marked": "^2.0.3",
+    "highlight.js": "^11.7.0"
+  }
+}
