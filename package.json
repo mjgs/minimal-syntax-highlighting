@@ -1,7 +1,7 @@
 {
   "name": "minimal-syntax-highlighting",
   "version": "0.0.1",
-  "description": "Minimal example demonstrsting syntsx highlighting",
+  "description": "Minimal example demonstrsting syntax highlighting",
   "main": "index.js",
   "scripts": {
     "build": "mkdir -p dist && node app.js",
