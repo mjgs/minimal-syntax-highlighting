@@ -4,7 +4,7 @@
   "description": "Minimal example demonstrsting syntax highlighting",
   "main": "index.js",
   "scripts": {
-    "build": "mkdir -p dist && node app.js",
+    "build": "mkdir -p dist && node app.js"
   },
   "author": "Mark Smith",
   "dependencies": {
