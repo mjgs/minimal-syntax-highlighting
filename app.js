@@ -39,7 +39,22 @@ marked.setOptions({
   smartypants: false,
   xhtml: false
 });
-const html = marked.parse(contents);
+const renderedContent = marked.parse(contents);
+
+const html = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>minimal-syntax-highlighting</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+</head>
+<body>
+  ${renderedContent}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"</script>
+</body>
+</html>
+`;
 
 // Output template
 const outputPath = path.join('dist', 'index.html');
