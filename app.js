@@ -42,7 +42,7 @@ marked.setOptions({
 const html = marked.parse(contents);
 
 // Output template
-const outputPath = path.join('site', 'index.html');
+const outputPath = path.join('dist', 'index.html');
 await write(outputPath, html);
 
 console.log('done');
