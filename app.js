@@ -8,21 +8,25 @@ const path = require('path');
 const marked = require('marked');
 const hljs = require('highlight.js');
 
-async function load(filePath) {
-  return readFile(filePath, {
-    encoding: 'utf8'
-  });
-}
-
-async function write(filePath, data) {
-  return fse.outputFile(filePath, data);
-}
-
 console.log('starting...');
 
 // Read template
 const templatePath = path.join('index.md');
-const contents = await load(templatePath);
+
+let content;
+
+(async () => {
+  try {
+    contents = await readFile(templatePath, {
+      encoding: 'utf8'
+    });
+  }
+  catch(e) {
+    console.error(e.message);
+    console.error(e.stack);
+    process.exit(1);
+  }
+})(); 
 
 // Render template
 marked.setOptions({
@@ -58,6 +62,16 @@ const html = `
 
 // Output template
 const outputPath = path.join('dist', 'index.html');
-await write(outputPath, html);
+
+(async () => {
+  try {
+    await fse.outputFile(outputPath, html);
+  }
+  catch(e) {
+    console.error(e.message);
+    console.error(e.stack);
+    process.exit(1);
+  }
+})(); 
 
 console.log('done');
