@@ -21,7 +21,7 @@ env:
  
 jobs:
   build_and_deploy:
-    name: Build
+    name: Build And Deploy
     runs-on: ubuntu-latest
     env:
       node-version: 16.14.2
