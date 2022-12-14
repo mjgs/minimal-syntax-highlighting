@@ -1,7 +1,5 @@
 #!/usr/bin/env node
 
-const debug = require('debug')('minimal-syntax-highlighting:app');
-
 const fse = require('fs-extra');
 const { readFile } = require('node:fs/promises');
 const path = require('path');
