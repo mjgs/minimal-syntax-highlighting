@@ -14,25 +14,15 @@ const templatePath = path.join(
   'index.md'
 );
 
+const outputPath = path.join(
+  process.cwd(),
+  'dist', 
+  'index.html'
+);
+
 console.log(`templatePath: [${templatePath}]`);
+console.log(`outputPath: [${outputPath}]`);
 
-let contents;
-
-(async () => {
-  try {
-    contents = await readFile(templatePath, {
-      encoding: 'utf8'
-    });
-    console.log(`contents: [${contents}]`);
-  }
-  catch(e) {
-    console.error(e.message);
-    console.error(e.stack);
-    process.exit(1);
-  }
-})(); 
-
-// Render template
 marked.setOptions({
   renderer: new marked.Renderer(),
   highlight: function(code, lang) {
@@ -48,41 +38,30 @@ marked.setOptions({
   xhtml: false
 });
 
-console.log(`Running marked with contents: [${contents}]`);
-
-const renderedContent = marked.parse(contents);
-
-const html = `
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>minimal-syntax-highlighting</title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width">
-</head>
-<body>
-  ${renderedContent}
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"</script>
-</body>
-</html>
-`;
-
-// Output template
-const outputPath = path.join(
-  process.cwd(),
-  'dist', 
-  'index.html'
-);
-
 (async () => {
   try {
+    const contents = await readFile(templatePath, { encoding: 'utf8' });
+    const renderedContent = marked.parse(contents);
+    const html = `
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <title>minimal-syntax-highlighting</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+      </head>
+      <body>
+        ${renderedContent}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"</script>
+      </body>
+      </html>
+    `;
     await fse.outputFile(outputPath, html);
+    console.log('done');
   }
   catch(e) {
     console.error(e.message);
     console.error(e.stack);
     process.exit(1);
   }
-})(); 
-
-console.log('done');
+})();
