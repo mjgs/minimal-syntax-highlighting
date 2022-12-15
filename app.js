@@ -9,7 +9,12 @@ const hljs = require('highlight.js');
 console.log('starting...');
 
 // Read template
-const templatePath = path.join('index.md');
+const templatePath = path.join(
+  process.cwd(), 
+  'index.md'
+);
+
+console.log(`templatePath: [${templatePath}]`);
 
 let contents;
 
@@ -18,6 +23,7 @@ let contents;
     contents = await readFile(templatePath, {
       encoding: 'utf8'
     });
+    console.log(`contents: [${contents}]`);
   }
   catch(e) {
     console.error(e.message);
@@ -41,6 +47,9 @@ marked.setOptions({
   smartypants: false,
   xhtml: false
 });
+
+console.log(`Running marked with contents: [${contents}]`);
+
 const renderedContent = marked.parse(contents);
 
 const html = `
@@ -59,7 +68,11 @@ const html = `
 `;
 
 // Output template
-const outputPath = path.join('dist', 'index.html');
+const outputPath = path.join(
+  process.cwd(),
+  'dist', 
+  'index.html'
+);
 
 (async () => {
   try {
