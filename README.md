@@ -2,7 +2,7 @@
 
 Minimal example demonstrating syntax highlighting with [marked](https://github.com/markedjs/marked) and [highlight.js](https://github.com/highlightjs/highlight.js).
 
-Build deployed on Netlify
+Build deployed on Netlify:
 
 https://ndjb.netlify.app
 
