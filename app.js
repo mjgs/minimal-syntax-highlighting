@@ -11,7 +11,7 @@ console.log('starting...');
 // Read template
 const templatePath = path.join('index.md');
 
-let content;
+let contents;
 
 (async () => {
   try {
