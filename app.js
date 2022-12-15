@@ -52,7 +52,7 @@ marked.setOptions({
       </head>
       <body>
         ${renderedContent}
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"</script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
       </body>
       </html>
     `;
