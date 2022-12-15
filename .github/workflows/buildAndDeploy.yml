@@ -53,6 +53,11 @@ jobs:
       - name: Run tree
         run: |
           tree -ap dist
+          
+      - name: Cat file
+        run: |
+          ll dist/index.html
+          cat dist/index.html
  
       - name: Deploy using Netlify CLI
         if: ${{ env.deploy_enabled == 'yes' }}
