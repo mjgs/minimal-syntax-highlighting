@@ -49,6 +49,7 @@ marked.setOptions({
         <title>minimal-syntax-highlighting</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css">
       </head>
       <body>
         ${renderedContent}
