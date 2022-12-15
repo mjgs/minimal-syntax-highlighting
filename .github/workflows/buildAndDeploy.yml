@@ -42,6 +42,10 @@ jobs:
         with:
           node-version: ${{ env.nodejs_version }}
  
+      - name: Install modules
+        run: |
+          npm install
+ 
       - name: Build Site
         run: |
           npm run build
