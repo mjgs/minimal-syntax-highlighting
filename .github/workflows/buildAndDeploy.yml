@@ -54,9 +54,9 @@ jobs:
         run: |
           tree -ap dist
           
-      - name: Cat file
+      - name: Print output to console
         run: |
-          ll dist/index.html
+          ls -la dist/index.html
           cat dist/index.html
  
       - name: Deploy using Netlify CLI
