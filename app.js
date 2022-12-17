@@ -8,7 +8,6 @@ const hljs = require('highlight.js');
 
 console.log('starting...');
 
-// Read template
 const templatePath = path.join(
   process.cwd(), 
   'index.md'
